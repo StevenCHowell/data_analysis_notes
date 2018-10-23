@@ -1,4 +1,4 @@
-# Comparing Different Distributions
+# Comparing Different Sample Distributions
 
 When comparing different distributions, before you can identify which test to use for the comparison, identify if the distributions are parametric or nonparametric.  There are 3 important assumptions for parametric distributions
 
