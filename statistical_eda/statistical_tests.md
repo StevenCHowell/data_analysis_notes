@@ -6,7 +6,16 @@ When comparing different distributions, before you can identify which test to us
 2. The distributions are normal 
 3. The distributions are homoscedastic, or the standard deviations are the same
 
-To test normallity, consider the following tests
+## Variance Testing
+
+To compare the variance of the different sample distributions, consider the following tests:
+
+- [Levene test](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35a.htm), typically the best option as it is insensitive to departures from normality.  This is implemented in SciPy as [`scipy.stats.levene()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.levene.html).
+- [Bartlett’s test](https://www.itl.nist.gov/div898/handbook/eda/section3/eda357.htm), sensitive to departures from normality.  I am not sure when this would be preferred over the Levene test.  This is implemented in SciPy as [`scipy.stats.bartlett()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bartlett.html).
+
+## Normality Testing
+
+To test normality, consider the following tests:
 
 - [Shapiro-Wilk test](https://en.wikipedia.org/wiki/Shapiro-Wilk_test), typically the best options though it does not work well for samples with many identical values.  This is implemented in SciPy as [`scipy.stats.shapiro()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html).
 - [Anderson-Darling test](https://en.wikipedia.org/wiki/Anderson-Darling_test), typically second best choice, after the Shapiro-Wilk test.  This is implemented in SciPy as [`scipy.stats.anderson()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.anderson.html).
