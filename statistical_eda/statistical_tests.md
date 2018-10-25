@@ -1,5 +1,12 @@
 # Comparing Different Sample Distributions
 
+## Testing for statistically significant differences between <a href="https://www.codecogs.com/eqnedit.php?latex=\geq" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\geq" title="\geq" /></a> 2 groups for a single factor variable
+
+1. Perform Levene's Test to check for homogeneity of variances (homoscedasticity) between the different groups
+2. Based on the results, perform a regression fit and get the residiuals using the appropriate ANOVA to check if the group means are different
+    - homoscedasticity: One Way ANOVA
+    - heteroscadisticity: Welch's One Way ANOVA
+
 When comparing different distributions, before you can identify which test to use for the comparison, identify if the distributions are parametric or nonparametric.  There are 3 important assumptions for parametric distributions
 
 1. The samples within each distribution are independent
@@ -28,4 +35,5 @@ To test normality, consider the following tests:
 
 It is surprising that there are so many different tests to evaluate normality.  Additionally, it is surprising to note that some of these tests, useful for identifying if a sample distribution is parametric, only apply under the assumption that the sample is parametric.
 This introduces a chicken-and-the-egg scenario.  One way to address this is to first perform the nonparametric test, which assumes less, then if the data passes, then use the parametric test.
-I am reminded of Allen Downey's blog posts, [There is only one test!](http://allendowney.blogspot.com/2011/05/there-is-only-one-test.html), and [There is still only one test!](http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html).
+
+Discussing all these different tests reminds me of Allen Downey's blog posts, [There is only one test!](http://allendowney.blogspot.com/2011/05/there-is-only-one-test.html), and [There is still only one test!](http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html).
