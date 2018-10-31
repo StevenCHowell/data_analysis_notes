@@ -56,3 +56,7 @@ It is surprising that there are so many different tests to evaluate normality.  
 This introduces a chicken-and-the-egg scenario.  One way to address this is to first perform the nonparametric test, which assumes less, then if the data passes, then use the parametric test.
 
 Discussing all these different tests reminds me of Allen Downey's blog posts, [There is only one test!](http://allendowney.blogspot.com/2011/05/there-is-only-one-test.html), and [There is still only one test!](http://allendowney.blogspot.com/2016/06/there-is-still-only-one-test.html).
+
+Recommended introductory books discussing this topic:
+1. [Statistics in a Nutshell](http://shop.oreilly.com/product/0636920023074.do) (1st edition has more discussion on alternative test cases)
+2. [Intermediate Statistics for Dummies](https://books.google.com/books/about/Intermediate_Statistics_For_Dummies.html?id=jwmdUe0dDSAC) 
