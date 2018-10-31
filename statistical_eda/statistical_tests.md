@@ -2,17 +2,36 @@
 
 ## Testing for statistically significant differences between <a href="https://www.codecogs.com/eqnedit.php?latex=\geq" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\geq" title="\geq" /></a> 2 groups for a single factor variable
 
-1. Perform Levene's Test to check for homogeneity of variances (homoscedasticity) between the different groups
-2. Based on the results, perform a regression fit and get the residiuals using the appropriate ANOVA to check if the group means are different
-    - homoscedasticity: One Way ANOVA
-    - heteroscadisticity: Welch's One Way ANOVA
+To compare two or more independent populations, we would use the t-test or analysis of variance (ANOVA) test, respectively.  The hypothesis we would be testing are
 
-When comparing different distributions, before you can identify which test to use for the comparison, identify if the distributions are parametric or nonparametric.  There are 3 important assumptions for parametric distributions
+- <a href="https://www.codecogs.com/eqnedit.php?latex=\text{H}_o:\,&space;\mu_1&space;=&space;\mu_2&space;=&space;\dots&space;=&space;\mu_n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\text{H}_0:\,&space;\mu_1&space;=&space;\mu_2&space;=&space;\dots&space;=&space;\mu_n" title="\text{H}_0:\, \mu_1 \neq \mu_2 \neq \dots \neq \mu_n" /></a>
+- <a href="https://www.codecogs.com/eqnedit.php?latex=\text{H}_a:\,&space;\mu_1&space;=&space;\mu_2&space;=&space;\dots&space;=&space;\mu_n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\text{H}_a:\,&space;\mu_1&space;\neq&space;\mu_2&space;\neq&space;\dots&space;\neq&space;\mu_n" title="\text{H}_a:\, \mu_1 \neq \mu_2 \neq \dots \neq \mu_n" /></a>
+
+Before performing the t-test or the ANOVA, one should verify the samples meet the following assumptions
 
 1. The samples within each distribution are independent
-2. The distributions are normal 
-3. The distributions are homoscedastic, or the standard deviations are the same
+2. The response value is quantitative and continuous 
+2. The distributions are normal (parametric)
+3. The standard deviations for the distributions are the same (homoscedastic)
 
+Given assumption 1 and 2 are met, the process of testing 3 and 4, then proceeding based on those results would be as follows:
+
+1. Test the assumptions
+    - Normality (parametric): Shapiro-Wilk's test or Kolmogorov-Smirnov
+    - Homogeneity of variances (homoscedastic): Levene's test
+2. Based on these results, compare the population distributions
+    - Both pass, parametric and homoscedastic:
+        - 2 groups: t-test (or Welch's t-test for small sample sizes, less than 30)
+        - 2 or more groups: ANOVA test
+    - Fail one, parametric but heteroscedastic:
+        - 2 groups: Welch's t-test
+        - 2 or more groups: Paired t-test using Benjamini-Hockberg method to adjust the p-values and state that the standard deviations are not the same
+    - Fail one, homoscedastic but nonparametric:
+        - 2 groups: Mann-Whitney U test (also know as the Wilcoxon rank-sum test)
+        - 2 or more groups: Kruskal Wallis test (<a href="https://www.codecogs.com/eqnedit.php?latex=\text{H}_o/\text{H}_a" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\text{H}_o/\text{H}_a" title="\text{H}_o/\text{H}_a" /></a>: mean ranks of the groups are the same/different)
+    - Fail both, nonparametric and heteroscedastic:
+        - 2 or more groups: Welch's ANOVA
+    
 ## Variance Testing
 
 To compare the variance of the different sample distributions, consider the following tests:
