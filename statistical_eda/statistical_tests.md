@@ -24,7 +24,7 @@ Given assumption 1 and 2 are met, the process of testing 3 and 4, then proceedin
         - 2 groups: t-test (or Welch's t-test for small sample sizes, less than 30)
         - 2 or more groups: ANOVA test
     - Fail one, parametric but heteroscedastic:
-        - 2 groups: Welch's t-test
+        - 2 groups: [Welch's t-test]() (implemented in Python as [`scipy.stats.ttest_ind(a, b, axis=0, equal_var=False)`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html))
         - 2 or more groups: Paired t-test using Benjamini-Hockberg method to adjust the p-values and state that the standard deviations are not the same
     - Fail one, homoscedastic but nonparametric:
         - 2 groups: Mann-Whitney U test (also know as the Wilcoxon rank-sum test)
