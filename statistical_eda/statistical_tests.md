@@ -24,14 +24,16 @@ Given assumption 1 and 2 are met, the process of testing 3 and 4, then proceedin
         - 2 groups: t-test (or Welch's t-test for small sample sizes, less than 30)
         - 2 or more groups: ANOVA test
     - Fail one, parametric but heteroscedastic:
-        - 2 groups: [Welch's t-test]() (implemented in Python as [`scipy.stats.ttest_ind(a, b, axis=0, equal_var=False)`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html))
-        - 2 or more groups: Paired t-test using Benjamini-Hockberg method to adjust the p-values and state that the standard deviations are not the same
+        - 2 groups: [Welch's t-test](https://en.wikipedia.org/wiki/Welch%27s_t-test) (implemented in Python as [`scipy.stats.ttest_ind(a, b, axis=0, equal_var=False)`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html))
+        - 2 or more groups: Welch's ANOVA (have not found Python implementation)
     - Fail one, homoscedastic but nonparametric:
         - 2 groups: Mann-Whitney U test (also know as the Wilcoxon rank-sum test)
         - 2 or more groups: Kruskal Wallis test (<a href="https://www.codecogs.com/eqnedit.php?latex=\text{H}_o/\text{H}_a" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\text{H}_o/\text{H}_a" title="\text{H}_o/\text{H}_a" /></a>: mean ranks of the groups are the same/different)
     - Fail both, nonparametric and heteroscedastic:
-        - 2 or more groups: Welch's ANOVA
-    
+        - Still under active research 
+            - [recent thesis](https://scholarscompass.vcu.edu/cgi/viewcontent.cgi?article=5026&context=etd)
+            - [recent article](https://doi.org/10.1080/10485252.2016.1225735)
+        
 ## Variance Testing
 
 To compare the variance of the different sample distributions, consider the following tests:
