@@ -22,7 +22,7 @@ Given assumption 1 and 2 are met, the process of testing 3 and 4, then proceedin
 2. Based on these results, compare the population distributions
     - Both pass, parametric and homoscedastic:
         - 2 groups: t-test (or Welch's t-test for small sample sizes, less than 30)
-        - 2 or more groups: ANOVA test
+        - 2 or more groups: ANOVA test (implemented in Python as [`scipy.stats.f_oneway`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.f_oneway.html))
     - Fail one, parametric but heteroscedastic:
         - 2 groups: [Welch's t-test](https://en.wikipedia.org/wiki/Welch%27s_t-test) (implemented in Python as [`scipy.stats.ttest_ind(a, b, axis=0, equal_var=False)`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html))
         - 2 or more groups: Welch's ANOVA (have not found Python implementation)
