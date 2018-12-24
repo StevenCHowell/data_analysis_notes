@@ -1,12 +1,20 @@
 # Seaborn plot types
 
-## `distplot()`
+## `kdeplot`
 
-The `distplot()` function provides a histogram alternative which plots a Gaussian Kernel Density Estimate (KDE).  Essentially, this is a continuous representation of a histogram.
+The `kdeplot` provides an alternative representation to a histogram, instead representing the data using a Gaussian Kernel Density Estimate (KDE).  Essentially, this is a continuous representation of a histogram.
 
-## `regplot()`
+## `distplot`
 
-The `regplot()` function generate a scatter plot with a regression line.
+The `distplot` combines `kdeplot` together with a histogram.
+
+## `rugplot`
+
+The `rugplot` shows data as tick marks, resembling yarn threads in a rug.
+
+## `regplot`
+
+The `regplot` function generate a scatter plot with a regression line.
 
 ```python
 sns.regplot(
@@ -17,9 +25,9 @@ sns.regplot(
 )
 ```
 
-## `lmplot()`
+## `lmplot`
 
-The `lmplot()` function is a more versatile version of `regplot()`. One advantage is it provides the ability to facet the plotting qualities to further express the data.
+The `lmplot` function is a more versatile version of `regplot`. One advantage is it provides the ability to facet the plotting qualities to further express the data.
 
 ```python
 sns.lmplot(
@@ -31,19 +39,19 @@ sns.lmplot(
 )
 ```
 
-## `swarmplot()`
+## `swarmplot`
 
 Similar to a histogram, with every data point represented.
 
-## `stripplot()`
+## `stripplot`
 
 Similar to the swarmplot, without the algorithmic spreading of the data.  Without the `jitter=True` parameter, all the data falls on a single line.  With that parameter, the data is spread into a thicker "strip", true to the plots name.
 
-## `lvplot()`
+## `lvplot`
 
 Letter value (LV) plots provide a non-parametric estimate of a dataset's distribution.  They are similar to boxplots, and violin plots, but unlike violin plots, they do not require fitting a kernel density estimate so they are faster to generate.
 
-## `heatmap()`
+## `heatmap`
 
 The `heatmap` plot is ideal for visualizing a matrix of numbers in a more visually simple way.  One of the most common applications is for plotting a cross-tabulation or correlation matrix (not the same).
 
@@ -131,7 +139,7 @@ ax.legend()
 plt.show()
 ```
 
-## Combining plots using `FacetGrid`, `factorplot`, and `lmplot`
+# Combining plots in Data-Aware Grids
 
 ## `FacetGrid`
 
@@ -172,3 +180,43 @@ g = g.map_offdiag(plt.scatter)
 ```
 
 By default, `pairplot` includes a regression line on the off-diagonal plots.
+
+```python
+sns.pairplot(data=df,
+        x_vars=["fatal_collisions_speeding", "fatal_collisions_alc"],
+        y_vars=['premiums', 'insurance_losses'],
+        kind='scatter',
+        hue='Region',
+        palette='husl')
+```
+
+## `JointGrid` and `jointplot`
+
+Again, similar to `FacetGrid`--`factorplot`, and `PairGrid`--`pairplot`, `JointGrid` and `jointplot` respectively provide a complex and simple approach to use create a plot with supportive marginal plots to better represent data.
+
+```python
+g = sns.JointGrid(data=df, x='Tuition', y='ADM_RATE_ALL')
+g = g.plot_joint(sns.kdeplot)
+g = g.plot_marginals(sns.kdeplot, shade=True)
+g = g.annotate(stats.pearsonr)
+```
+
+Note that the joint and marginal plots can be manually specified using `plot_joint` and `plot_marginals()`, as done above.  Alternatively, though you lose some customizability, the joint and marginal plot commands can be combined using the method `plot`.  While it loses the shaded quality of the marginal plots, the above code could instead be as follows.
+
+```python
+g = sns.JointGrid(data=df, x='Tuition', y='ADM_RATE_ALL')
+g = g.plot(sns.kdeplot, sns.kdeplot)
+g = g.annotate(stats.pearsonr)
+```
+
+
+```python
+g = sns.jointplot(
+    x='Tuition',
+    y='ADM_RATE_ALL',
+    kind='scatter',
+    xlim=(0, 25000),
+    marginal_kws=dict(bins=15, rug=True),
+    data=df.query('UG < 2500 & Ownership == "Public"')
+).plot_joint(sns.kdeplot)
+```
