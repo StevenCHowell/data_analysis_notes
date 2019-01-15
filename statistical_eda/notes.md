@@ -1,6 +1,6 @@
 # Notes from Statistical EDA
 
-- When creating a histogram, a good rule of thumb is to select the number of bins as the square root of the number of samples.
+- When creating a histogram, a good rule of thumb is to select the number of bins as the square root of the number of samples.  `n_bins = np.sqrt(len(data))`
 
 ## Bee Swarm Plot
 
@@ -9,6 +9,10 @@ The Bee Swarm plot loses its value if the number of data points gets too large f
 It may be possible to alleviate this using smaller markers to represent each data point.
 A bee swarm plot is available from the Seaborn package as
 `sns.swarmplot()`.
+
+```python
+_ = sns.swarmplot(x='x_col', y='y_col', data=df)
+```
 
 ## Empirical Cumulative Distribution Function (ECDF)
 
@@ -31,6 +35,9 @@ def ecdf(data):
     y = np.arange(1, n+1) / n
 
     return x, y
+
+x, y = ecdf(data)
+_ = plt.plot(x, y, marker='.', linestyle='none')
 ```
 
 ## Gaussian Kernel Density Estimate (KDE)
@@ -42,3 +49,43 @@ import seaborn as sns
 
 sns.distplot(df['alcohol'])
 ```
+
+## Percentile Values
+
+NumPy's `percentile` function provides a quick way to calculate the percentiles.
+
+```python
+percentiles = np.array([2.5, 25, 50, 75, 97.5])
+p_vals = np.percentile(data, percentiles)
+```
+
+These can be shown on the ECDF to provide better intuition about the distribution.
+
+```python
+_ = plt.plot(
+    p_vals, percentiles/100,
+    marker='D', color='red',
+    linestyle='none'
+)
+```
+
+## Distribution Function
+
+Two closely related distribution functions are the probability distribution function (PDF) and the cumulative distribution function (CDF).  The PDF depicts how likely something is to happen.  Though a PDF will have corresponding x- and y-values, it does not make sense to talk about the probability at a precise x-value, as it would be zero.  Instead one should consider the probability of occurance between two x-values, which is described by integrating the curve between these limits.
+
+This idea of integrating the PDF leads to the CDF.  The CDF depicts the cumulative probability of occurance between x=0 and the specified x-value.
+
+When comparing a data set to a Gaussian normal distribution, the CDF provides a better comparison than would a PDF.  Comparing a PDF to the histogram of the data is prone to error caused by binning bias.  Instead, calculate the CDF of a Gaussian distribution using the mean and standard deviation of the data, and comparing this with the ECDF.
+
+```python
+mean = np.mean(data)
+std = np.std(data)
+samples = np.random.normal(mean, std, size=10000)  # this seems unnecessary
+x, y = ecdf(data)
+x_theory, y_theory = ecdf(samples)
+_ = plt.plot(x_theory, y_theory)
+_ = plt.plot(x, y, marker='.', linestyle='none')
+plt.show()
+```
+
+Another important distribution function is the exponential distribution function.  When the occurance of an event can be modelled using a Poisson process, an exponential distribution describes the time between events.  This distribution is implemented within NumPy as `np.random.exponential(scale=1.0, size=None)`.
