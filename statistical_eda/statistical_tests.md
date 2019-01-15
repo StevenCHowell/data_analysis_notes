@@ -10,9 +10,9 @@ To compare two or more independent populations, we would use the t-test or analy
 Before performing the t-test or the ANOVA, one should verify the samples meet the following assumptions
 
 1. The samples within each distribution are independent
-2. The response value is quantitative and continuous 
-2. The distributions are normal (parametric)
-3. The standard deviations for the distributions are the same (homoscedastic)
+2. The response value is quantitative and continuous
+3. The distributions are normal (parametric)
+4. The standard deviations for the distributions are the same (homoscedastic)
 
 Given assumption 1 and 2 are met, the process of testing 3 and 4, then proceeding based on those results would be as follows:
 
@@ -30,10 +30,10 @@ Given assumption 1 and 2 are met, the process of testing 3 and 4, then proceedin
         - 2 groups: Mann-Whitney U test (also know as the Wilcoxon rank-sum test)
         - 2 or more groups: Kruskal Wallis test (<a href="https://www.codecogs.com/eqnedit.php?latex=\text{H}_o/\text{H}_a" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\text{H}_o/\text{H}_a" title="\text{H}_o/\text{H}_a" /></a>: mean ranks of the groups are the same/different)
     - Fail both, nonparametric and heteroscedastic:
-        - Still under active research 
+        - Still under active research
             - [recent thesis](https://scholarscompass.vcu.edu/cgi/viewcontent.cgi?article=5026&context=etd)
             - [recent article](https://doi.org/10.1080/10485252.2016.1225735)
-        
+
 ## Variance Testing
 
 To compare the variance of the different sample distributions, consider the following tests:
@@ -61,4 +61,4 @@ Discussing all these different tests reminds me of Allen Downey's blog posts, [T
 
 Recommended introductory books discussing this topic:
 1. [Statistics in a Nutshell](http://shop.oreilly.com/product/0636920023074.do) (1st edition has more discussion on alternative test cases)
-2. [Intermediate Statistics for Dummies](https://books.google.com/books/about/Intermediate_Statistics_For_Dummies.html?id=jwmdUe0dDSAC) 
+2. [Intermediate Statistics for Dummies](https://books.google.com/books/about/Intermediate_Statistics_For_Dummies.html?id=jwmdUe0dDSAC)
